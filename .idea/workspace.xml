@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfca20ca-9152-48f2-8b17-521dd570b237" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/FreeRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/IRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Reservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/RoomType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Tester.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AdminMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HotelReservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/AdminResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,10 +47,38 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.HotelReservation">
+    <configuration name="HotelReservation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="HotelReservation" />
+      <module name="HotelReservation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainMenu" />
+      <module name="HotelReservation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReservationService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="service.ReservationService" />
+      <module name="HotelReservation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.Tester" />
       <module name="HotelReservation" />
@@ -64,6 +94,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HotelReservation" />
+        <item itemvalue="Application.ReservationService" />
+        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.Tester" />
       </list>
     </recent_temporary>

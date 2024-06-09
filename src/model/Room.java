@@ -16,17 +16,19 @@ public class Room implements IRoom{
 
     @Override
     public String getRoomNumber() {
-        return null;
+        return this.roomNumber;
     }
 
     @Override
     public Double getRoomPrice() {
-        return null;
+
+        return this.price;
     }
 
     @Override
     public RoomType getRoomType() {
-        return null;
+
+        return this.enumeration;
     }
 
     @Override
