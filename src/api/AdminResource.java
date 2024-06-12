@@ -16,7 +16,6 @@ public class AdminResource {
     public static final AdminResource ADMIN_RESOURCE = new AdminResource();
 
     public Customer getCustomer(String email){
-
         return CUSTOMER_SERVICE.getCustomer(email);
     }
 
@@ -27,14 +26,22 @@ public class AdminResource {
     public void getAllRooms(){
         RESERVATION_SERVICE.getAllRooms();
     }
-    public Collection<Customer>getAllCustomers(){
+    public Collection<Customer>getAllCustomers() {
 
         Collection<Customer> customers = CUSTOMER_SERVICE.getAllCustomers();
 
-        for(Customer c: customers){
-            System.out.println("First Name: " + c.getFirstName()+ "  Last Name: " + c.getLastName() + "  Email: "+ c.getEmail());
+        if (customers.isEmpty()) {
+            System.out.println("No customers were found!");
+            System.out.println();
+        } else {
+
+            for (Customer c : customers) {
+                System.out.println("First Name: " + c.getFirstName() + "  Last Name: " + c.getLastName() + "  Email: " + c.getEmail());
+            }
+
         }
-        return null;
+            return null;
+
     }
 
     public void displayAllReservations(){

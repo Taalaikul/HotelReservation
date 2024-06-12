@@ -34,7 +34,9 @@ public class AdminMenu {
                 ADMIN_RESOURCE.getAllRooms();
                 AdminMenu.adminMenu();
             } else if (adminChoice == 3) {
+                System.out.println();
                 ADMIN_RESOURCE.displayAllReservations();
+                System.out.println();
                 AdminMenu.adminMenu();
             } else if (adminChoice == 4) {
                 createRoom();
@@ -43,9 +45,10 @@ public class AdminMenu {
                 MainMenu.mainMenu();
             } else {
                 System.out.println("Please select a number between 1 and 5!");
+                System.out.println();
             }
-        }catch(Exception e){
-            System.out.println("Invalid input!");
+        }catch(Exception e) {
+            System.out.println("Invalid input! Please enter a number between 1 and 5");
         }
 
     }

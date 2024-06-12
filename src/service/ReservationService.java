@@ -16,17 +16,33 @@ public class ReservationService {
     };
 
     public void getAllRooms(){
-        for(Map.Entry<String, IRoom> entry : roomsMap.entrySet()) {
-            IRoom room = entry.getValue();
-            Double price = room.getRoomPrice();
-            Enum e = room.getRoomType();
-            String roomNumber = entry.getKey();
-            System.out.println("Room Number: " + roomNumber + " " + "Room price: " + price + " " +"Room Type: " + e);
+
+        if(roomsMap.isEmpty()){
+            System.out.println("No rooms were found!");
+            System.out.println();
+        }else {
+            for (Map.Entry<String, IRoom> entry : roomsMap.entrySet()) {
+                IRoom room = entry.getValue();
+                Double price = room.getRoomPrice();
+                Enum e = room.getRoomType();
+                String roomNumber = entry.getKey();
+                System.out.println("Room Number: " + roomNumber + " " + "Room price: " + price + " " + "Room Type: " + e);
+            }
         }
    }
 
-    public IRoom getARoom(String roomId){
 
+   public Collection<IRoom> getTotalRooms(){
+        Collection<IRoom> allRooms = new LinkedList<>();
+
+       for(Map.Entry<String, IRoom> entry : roomsMap.entrySet()) {
+           allRooms.add(entry.getValue());
+       }
+
+       return  allRooms;
+   }
+
+    public IRoom getARoom(String roomId){
         return roomsMap.get(roomId);
     };
 
@@ -42,22 +58,34 @@ public class ReservationService {
         return Collections.singleton(reservationMap.get(customersEmail));
     }
 
-
-
     public void printAllReservation(){
 
         if(reservationMap.isEmpty()){
             System.out.println("No reservation found!");
         }else{
             for(Map.Entry<String, Reservation> reservation : reservationMap.entrySet()){
+
                 Reservation reservation1 = reservation.getValue();
                 Customer c = reservation1.getCustomer();
                 String email = reservation.getKey();
 
-                System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() + "Dates: " +reservation1.getCheckInDate()+" - "+reservation1.getCheckOutDate());
+                System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() + " Dates: " +reservation1.getCheckInDate()+" - "+reservation1.getCheckOutDate());
             }
         }
     };
+
+    public Collection<Reservation> getReservations (){
+
+        Collection<Reservation> reservations = new ArrayList<>();
+
+        for(Map.Entry<String, Reservation> reservation : reservationMap.entrySet()){
+
+            reservations.add(reservation.getValue());
+
+        }
+
+        return reservations;
+    }
 
 
 }
