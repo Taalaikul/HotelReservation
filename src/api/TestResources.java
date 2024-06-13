@@ -38,14 +38,21 @@ public class TestResources {
         ADMIN_RESOURCE.displayAllReservations();
         System.out.println();
 
-        System.out.println("Customers reservation: " + HOTEL_RESOURCE.getCustomersReservation("maggie@gmail.com"));
+        System.out.println("Customers reservation: " + HOTEL_RESOURCE.getCustomersReservation("alice@gmail.com"));
         System.out.println();
 
         System.out.println("All booked rooms");
         System.out.println(HOTEL_RESOURCE.bookedRooms());
 
+        Date checkIn = new Date(01/01/2000);
+        Date checkOut = new Date(01/02/2000);
+
 
         System.out.println("Available rooms");
-        System.out.println( HOTEL_RESOURCE.findARoom(new Date(01/07/2024), new Date(01/10/2024)));
+        System.out.println( HOTEL_RESOURCE.findARoom(checkIn, checkOut));
+
+        System.out.println("AlternateDate Rooms");
+        System.out.println(HOTEL_RESOURCE.alternateDateRooms(checkIn, checkOut));
+
     }
 }

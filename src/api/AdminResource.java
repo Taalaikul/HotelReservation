@@ -2,16 +2,21 @@ package api;
 
 import model.Customer;
 import model.IRoom;
+import service.CustomerService;
+import service.ReservationService;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static service.CustomerService.CUSTOMER_SERVICE;
-import static service.ReservationService.RESERVATION_SERVICE;
+
+
 
 public class AdminResource {
+
+    CustomerService CUSTOMER_SERVICE = CustomerService.getInstance();
+    ReservationService RESERVATION_SERVICE = ReservationService.getInstance();
 
     public static final AdminResource ADMIN_RESOURCE = new AdminResource();
 

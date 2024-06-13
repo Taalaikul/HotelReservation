@@ -2,13 +2,16 @@ package api;
 
 import model.IRoom;
 import model.Reservation;
+import service.CustomerService;
+import service.ReservationService;
 
 import java.util.*;
 
-import static service.CustomerService.CUSTOMER_SERVICE;
-import static service.ReservationService.RESERVATION_SERVICE;
-
 public class HotelResource {
+
+    CustomerService CUSTOMER_SERVICE = CustomerService.getInstance();
+
+    ReservationService RESERVATION_SERVICE = ReservationService.getInstance();
 
     public static final HotelResource HOTEL_RESOURCE = new HotelResource();
 
@@ -20,7 +23,6 @@ public class HotelResource {
     public void createACustomer(String email, String firstName, String lastName){
         CUSTOMER_SERVICE.addCustomer(email, firstName, lastName);
     };
-
 
     public IRoom getRoom(String roomNumber){
         return RESERVATION_SERVICE.getARoom(roomNumber);
@@ -50,24 +52,63 @@ public class HotelResource {
     }
 
 
+
+
     public Collection<IRoom> findARoom(Date checkIn, Date checkout){
 
-        Collection<IRoom> availableRooms = new LinkedList<>();
+        Collection<IRoom> availableRooms = RESERVATION_SERVICE.getAvailableRooms(checkIn, checkout);
 
-       Collection<Reservation> reservationCollection = RESERVATION_SERVICE.getReservations();
-       Collection<IRoom> bookedRooms = bookedRooms();
-
-       if(bookedRooms.isEmpty()){
-            RESERVATION_SERVICE.getAllRooms();
-       }else{
-           for(Reservation reservation: reservationCollection){
-            if(reservation.getCheckInDate().after(checkout) && reservation.getCheckOutDate().before(checkIn) ) {
-                availableRooms.add(reservation.getRoom());
-            }
-            }
-       }
 
         return availableRooms;
+    }
+
+    public static Date additionalDates (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 10);
+
+        return calendar.getTime();
+    }
+
+    public static Date additionalOneDay (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+
+        return calendar.getTime();
+    }
+
+    public static Date minusDates (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -10);
+
+        return calendar.getTime();
+    }
+
+    public static Date minusOneDay (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -1);
+
+        return calendar.getTime();
+    }
+
+    public Collection<IRoom> alternateDateRooms(Date checkIn, Date checkOut){
+
+        Collection<IRoom> alternateDateRooms = new LinkedList<>();
+
+        Date checkInDate = additionalOneDay(checkOut);
+        Date checkOutDate = additionalDates(checkOut);
+
+        Date ch = minusDates(checkIn);
+        Date chOut = minusOneDay(checkIn);
+
+        alternateDateRooms.addAll(findARoom(checkInDate, checkOutDate));
+        alternateDateRooms.addAll(findARoom(ch, chOut));
+
+
+        return alternateDateRooms;
     }
 
 

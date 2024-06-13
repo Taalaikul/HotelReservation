@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfca20ca-9152-48f2-8b17-521dd570b237" name="Changes" comment="Admin menu almost done">
-      <change afterPath="$PROJECT_DIR$/src/api/TestResources.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/TestServices.java" afterDir="false" />
+    <list default="true" id="cfca20ca-9152-48f2-8b17-521dd570b237" name="Changes" comment="finalizing">
+      <change afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HotelReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HotelReservation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/AdminResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/AdminResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/HotelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/TestResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/TestResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/TestServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TestServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,9 +108,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.HotelReservation" />
-        <item itemvalue="Application.Tester (1)" />
-        <item itemvalue="Application.TestResources" />
         <item itemvalue="Application.TestServices" />
+        <item itemvalue="Application.TestResources" />
+        <item itemvalue="Application.Tester (1)" />
         <item itemvalue="Application.HotelResource" />
       </list>
     </recent_temporary>
@@ -139,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717903306219</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="finalizing">
+      <created>1718222776470</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718222776470</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,6 +161,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Admin menu almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin menu almost done" />
+    <MESSAGE value="finalizing" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalizing" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tester.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

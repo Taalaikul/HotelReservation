@@ -9,7 +9,7 @@ import java.util.*;
 
 import static api.AdminResource.ADMIN_RESOURCE;
 import static api.HotelResource.HOTEL_RESOURCE;
-import static service.ReservationService.RESERVATION_SERVICE;
+
 
 public class MainMenu {
 
@@ -94,10 +94,13 @@ public class MainMenu {
             System.out.println("Enter CheckOut Date in the format mm/dd/yyyy");
             Date checkOutDate = getInputDate();
 
+            printAvailableRooms(checkInDate, checkOutDate);
+
             System.out.println("Enter room number");
             Scanner scanner2 = new Scanner(System.in);
-            IRoom room = HOTEL_RESOURCE.getRoom(scanner2.nextLine());
+            String roomNumber = scanner2.nextLine();
 
+            IRoom room = HOTEL_RESOURCE.getRoom(roomNumber);
             HOTEL_RESOURCE.bookARoom(email, room, checkInDate, checkOutDate);
         } catch (Exception e){
         System.out.println("Your account was not found!");
@@ -109,6 +112,37 @@ public class MainMenu {
         System.out.println();
         mainMenu();
 
+    }
+
+    public static Collection<IRoom> getAvailableRooms(Date checkInDate, Date checkOutDate){
+        Collection<IRoom> rooms = HOTEL_RESOURCE.findARoom(checkInDate, checkOutDate);
+        Collection<IRoom> additionalRooms = HOTEL_RESOURCE.alternateDateRooms(checkInDate, checkOutDate);
+
+        Date checkIn= HOTEL_RESOURCE.additionalOneDay(checkOutDate);
+        Date checkOut = HOTEL_RESOURCE.additionalDates(checkOutDate);
+
+        Date ch = HOTEL_RESOURCE.minusDates(checkInDate);
+        Date chOut = HOTEL_RESOURCE.minusOneDay(checkInDate);
+
+
+        if(!rooms.isEmpty()){
+            return rooms;
+        }else {
+            System.out.println("No rooms are available. Here are rooms for alternate dates: " + " " + checkIn + "-" +checkOut + " and " + ch + "-" +chOut);
+            for(IRoom room: additionalRooms){
+                System.out.println("Available rooms: " + " Room number: " + room.getRoomNumber() + " Room price: " + room.getRoomPrice() + "Room type " +room.getRoomType());
+            }
+
+        }
+        return additionalRooms;
+    }
+
+    public static void printAvailableRooms(Date checkIn, Date checkOut){
+
+        Collection<IRoom> allAvailableRooms = getAvailableRooms(checkIn, checkOut);
+        for(IRoom room: allAvailableRooms){
+            System.out.println("Available rooms: " + " Room number: " + room.getRoomNumber() + " Room price: " + room.getRoomPrice() + "Room type " +room.getRoomType());
+        }
     }
 
     public static String getCustomersAccount(){
@@ -192,16 +226,29 @@ public class MainMenu {
     }
 
 
-    private static Date getInputDate() {
-        Scanner scanner = new Scanner(System.in);
+    public static Date getInputDate() {
+
+        Date inputDate = null;
         try {
-            return new SimpleDateFormat("mm/dd/yyyy").parse(scanner.nextLine());
-        } catch (ParseException ex) {
-            System.out.println("Error: Invalid date.");
+            Scanner scanner = new Scanner(System.in);
+            String date = scanner.nextLine();
+
+
+            int month = Integer.parseInt(date.substring(0, 2))-1;
+            int day = Integer.parseInt(date.substring(3, 5));
+            int year = Integer.parseInt(date.substring(6));
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+             inputDate = calendar.getTime();
+
+        }catch(Exception e){
+            System.out.println("Please enter a correct date!");
             reserveARoom();
         }
 
-        return null;
+        return inputDate;
     }
 
     private static void printCustomersReservations(String email){

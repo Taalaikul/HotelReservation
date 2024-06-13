@@ -1,20 +1,20 @@
 package service;
 
-import model.Customer;
-import model.IRoom;
-import model.Room;
-import model.RoomType;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-import static service.CustomerService.CUSTOMER_SERVICE;
-import static service.ReservationService.RESERVATION_SERVICE;
+
 
 public class TestServices {
 
     public static void main(String[] args){
+
+        CustomerService CUSTOMER_SERVICE = CustomerService.getInstance();
+        ReservationService RESERVATION_SERVICE = ReservationService.getInstance();
 
         CUSTOMER_SERVICE.addCustomer("tx@gx.com", "tasya", "jum");
 
@@ -48,8 +48,43 @@ public class TestServices {
 
         System.out.println("All the reservations");
         RESERVATION_SERVICE.printAllReservation();
+        System.out.println();
 
         System.out.println("Reservation collection: ");
         System.out.println(RESERVATION_SERVICE.getReservations());
+
+        System.out.println();
+
+        System.out.println("ALl reserved rooms: " + RESERVATION_SERVICE.getAllReservedRooms());
+        System.out.println();
+
+        System.out.println("All not reservedRooms: " + RESERVATION_SERVICE.getAllNotReservedRoom());
+        System.out.println();
+
+        Date date1 = new Date(2000, 01, 01);
+        Date date2 = new Date(2000, 01, 02);
+
+
+
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(date1);
+        cal2.setTime(date2);
+
+        if (date1.compareTo(date2) > 0) {
+            System.out.println("Date1 is after Date2");
+        } else if (date1.compareTo(date2) < 0) {
+            System.out.println("Date1 is before Date2");
+        } else {
+            System.out.println("Date1 is equal to Date2");
+        }
+
+
+
+        Collection<IRoom> res = RESERVATION_SERVICE.getAvailableRooms(date1, date2);
+
+        System.out.println("Available rooms are: " + res);
+
+
     }
 }

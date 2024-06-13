@@ -4,12 +4,17 @@ import model.*;
 
 import java.util.*;
 
+
 public class ReservationService {
 
-    public static final ReservationService RESERVATION_SERVICE = new ReservationService();
+    private static ReservationService RESERVATION_SERVICE;
+
+    private ReservationService() {
+    }
 
     Map<String, Reservation> reservationMap = new HashMap<>();
     Map<String, IRoom> roomsMap = new HashMap<>();
+
 
     public void addRoom(IRoom room){
         roomsMap.put(room.getRoomNumber(), room);
@@ -32,19 +37,21 @@ public class ReservationService {
    }
 
 
-   public Collection<IRoom> getTotalRooms(){
-        Collection<IRoom> allRooms = new LinkedList<>();
-
-       for(Map.Entry<String, IRoom> entry : roomsMap.entrySet()) {
-           allRooms.add(entry.getValue());
-       }
-
-       return  allRooms;
-   }
 
     public IRoom getARoom(String roomId){
         return roomsMap.get(roomId);
     };
+
+    public Collection<IRoom> getAllReservedRooms(){
+        Collection<IRoom> reservedRooms = new LinkedList<>();
+
+        for (Map.Entry<String, Reservation> entry : reservationMap.entrySet()) {
+            Reservation reservation = entry.getValue();
+            reservedRooms.add( reservation.getRoom());
+        }
+
+        return reservedRooms;
+    }
 
     public Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
@@ -79,12 +86,51 @@ public class ReservationService {
         Collection<Reservation> reservations = new ArrayList<>();
 
         for(Map.Entry<String, Reservation> reservation : reservationMap.entrySet()){
-
             reservations.add(reservation.getValue());
+        }
+        return reservations;
+    }
 
+    public Collection<IRoom> getAllNotReservedRoom(){
+
+        Collection<IRoom> notReservedRooms = new ArrayList<>();
+        Collection<IRoom> allReservedRooms = getAllReservedRooms();
+
+       for(IRoom room: roomsMap.values()){
+           if(!allReservedRooms.contains(room)){
+               notReservedRooms.add(room);
+           }
+       }
+
+        return notReservedRooms;
+    }
+
+    public Collection<IRoom> getAvailableRooms(Date checkIn, Date checkOut){
+
+        Collection<Reservation> reservations = getReservations();
+        Collection<IRoom> availableRooms = getAllNotReservedRoom();
+
+        if(reservationMap.isEmpty()){
+            availableRooms.addAll(roomsMap.values());
+        }else{
+            for(Reservation reservation: reservations){
+                if(reservation.getCheckInDate().after(checkOut) || reservation.getCheckOutDate().before(checkIn)){
+                    availableRooms.add(reservation.getRoom());
+                }
+            }
         }
 
-        return reservations;
+
+
+        return availableRooms;
+}
+
+    public static ReservationService getInstance() {
+        if(RESERVATION_SERVICE == null) {
+            RESERVATION_SERVICE = new ReservationService();
+        }
+
+        return RESERVATION_SERVICE;
     }
 
 
