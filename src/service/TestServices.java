@@ -40,7 +40,7 @@ public class TestServices {
         RESERVATION_SERVICE.getAllRooms();
         System.out.println();
 
-        RESERVATION_SERVICE.reserveARoom(c, room, new Date(12/02/2024), new Date(12/04/2024));
+        System.out.println( RESERVATION_SERVICE.reserveARoom(c, room, new Date(12/02/2024), new Date(12/04/2024)));
 
 
         System.out.println("Reservation: " + RESERVATION_SERVICE.getCustomersReservation(c));

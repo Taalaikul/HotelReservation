@@ -12,7 +12,8 @@ public class ReservationService {
     private ReservationService() {
     }
 
-    Map<String, Reservation> reservationMap = new HashMap<>();
+    Collection<Reservation> reservationCollection = new ArrayList<>();
+    Map<String, Collection<Reservation>> reservationMap = new HashMap<>();
     Map<String, IRoom> roomsMap = new HashMap<>();
 
 
@@ -45,9 +46,12 @@ public class ReservationService {
     public Collection<IRoom> getAllReservedRooms(){
         Collection<IRoom> reservedRooms = new LinkedList<>();
 
-        for (Map.Entry<String, Reservation> entry : reservationMap.entrySet()) {
-            Reservation reservation = entry.getValue();
-            reservedRooms.add( reservation.getRoom());
+        for (Collection<Reservation> entry : reservationMap.values()) {
+            for(Reservation reservation: entry){
+                reservedRooms.add( reservation.getRoom());
+            }
+            //Reservation reservation = entry.getValue();
+
         }
 
         return reservedRooms;
@@ -55,14 +59,23 @@ public class ReservationService {
 
     public Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
-        reservationMap.put(customer.getEmail(), reservation);
+        if(!reservationMap.containsKey(customer.getEmail())){
+            Collection<Reservation> newReservations = new ArrayList<>();
+            newReservations.add(reservation);
+            reservationMap.put(customer.getEmail(), newReservations);
+        }else {
+            Collection<Reservation> customersReservations = reservationMap.get(customer.getEmail());
+            customersReservations.add(reservation);
+            reservationMap.put(customer.getEmail(), customersReservations);
+        }
         return reservation;
     }
 
 
     public Collection<Reservation> getCustomersReservation( Customer customer){
         String customersEmail = customer.getEmail();
-        return Collections.singleton(reservationMap.get(customersEmail));
+       // return Collections.singleton(reservationMap.get(customersEmail));
+        return reservationMap.get(customersEmail);
     }
 
     public void printAllReservation(){
@@ -70,14 +83,27 @@ public class ReservationService {
         if(reservationMap.isEmpty()){
             System.out.println("No reservation found!");
         }else{
-            for(Map.Entry<String, Reservation> reservation : reservationMap.entrySet()){
 
-                Reservation reservation1 = reservation.getValue();
-                Customer c = reservation1.getCustomer();
-                String email = reservation.getKey();
+            for(Collection<Reservation> entry : reservationMap.values()){
 
-                System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() + " Dates: " +reservation1.getCheckInDate()+" - "+reservation1.getCheckOutDate());
+                for(Reservation reservation: entry){
+                    Customer c = reservation.getCustomer();
+
+                    System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() +"\n"+
+                                        "Room: " + reservation.getRoom().getRoomNumber() +"\n"+
+                                        "Price: " + reservation.getRoom().getRoomPrice() +"\n"+
+                                        "Dates: " +reservation.getCheckInDate()+" - "+reservation.getCheckOutDate());
+
+
+                }
             }
+
+//            for(Reservation reservation : reservationMap.values()){
+//
+//                Customer c = reservation.getCustomer();
+//
+//                System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() + " Dates: " +reservation.getCheckInDate()+" - "+reservation.getCheckOutDate());
+//            }
         }
     };
 
@@ -85,8 +111,10 @@ public class ReservationService {
 
         Collection<Reservation> reservations = new ArrayList<>();
 
-        for(Map.Entry<String, Reservation> reservation : reservationMap.entrySet()){
-            reservations.add(reservation.getValue());
+        for(Collection<Reservation> reservation : reservationMap.values()){
+            for(Reservation reservation1: reservation){
+                reservations.add(reservation1);
+            }
         }
         return reservations;
     }
