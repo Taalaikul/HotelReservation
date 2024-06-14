@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfca20ca-9152-48f2-8b17-521dd570b237" name="Changes" comment="finalizing">
-      <change afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
+    <list default="true" id="cfca20ca-9152-48f2-8b17-521dd570b237" name="Changes" comment="finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/AdminResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/AdminResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/HotelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/TestResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/TestResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/TestServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TestServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +36,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.HotelReservation">
     <configuration name="HotelReservation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="HotelReservation" />
@@ -145,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718222776470</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="finished">
+      <created>1718322313978</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718322313978</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -162,7 +161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Admin menu almost done" />
     <MESSAGE value="finalizing" />
-    <option name="LAST_COMMIT_MESSAGE" value="finalizing" />
+    <MESSAGE value="finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

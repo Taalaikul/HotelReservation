@@ -1,4 +1,5 @@
 import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import model.Customer;
 import model.IRoom;
 import model.Reservation;
@@ -83,10 +84,11 @@ public class MainMenu {
 
 
     public static void reserveARoom(){
+        String email = "";
 
         try {
 
-            String email = getCustomersAccount();
+            email = getCustomersAccount();
 
             System.out.println("Enter CheckIn Date in the format mm/dd/yyyy");
             Date checkInDate = getInputDate();
@@ -108,7 +110,7 @@ public class MainMenu {
         mainMenu();
     }
 
-        System.out.println("Your reservation was successful!");
+        printCustomersReservations(email);
         System.out.println();
         mainMenu();
 
@@ -259,9 +261,13 @@ public class MainMenu {
            Customer c = reservation.getCustomer();
            Date date = reservation.getCheckInDate();
            Date date1 = reservation.getCheckOutDate();
+           IRoom room = reservation.getRoom();
 
            System.out.println(
+                   "Reservation: " + "\n" +
                    "Name: " + c.getFirstName() + " " +  c.getLastName() + "\n" +
+                           "Room: " + room.getRoomNumber() + " " + room.getRoomType()  + "\n" +
+                           "Price per night: " + room.getRoomPrice() + "\n" +
                    "CheckIn Date " + date + "\n" +
                    "CheckOut Date " + date1
            );
