@@ -58,7 +58,6 @@ public class HotelResource {
 
         Collection<IRoom> availableRooms = RESERVATION_SERVICE.getAvailableRooms(checkIn, checkout);
 
-
         return availableRooms;
     }
 

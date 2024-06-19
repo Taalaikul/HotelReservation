@@ -40,7 +40,11 @@ public class TestServices {
         RESERVATION_SERVICE.getAllRooms();
         System.out.println();
 
-        System.out.println( RESERVATION_SERVICE.reserveARoom(c, room, new Date(12/02/2024), new Date(12/04/2024)));
+        Date date1 = new Date(2000, 01, 01);
+        Date date2 = new Date(2000, 01, 02);
+
+
+        System.out.println( RESERVATION_SERVICE.reserveARoom(c, room, date1, date2));
 
 
         System.out.println("Reservation: " + RESERVATION_SERVICE.getCustomersReservation(c));
@@ -61,27 +65,28 @@ public class TestServices {
         System.out.println("All not reservedRooms: " + RESERVATION_SERVICE.getAllNotReservedRoom());
         System.out.println();
 
-        Date date1 = new Date(2000, 01, 01);
-        Date date2 = new Date(2000, 01, 02);
 
 
 
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(date1);
-        cal2.setTime(date2);
+//        Calendar cal1 = Calendar.getInstance();
+//        Calendar cal2 = Calendar.getInstance();
+//        cal1.setTime(date1);
+//        cal2.setTime(date2);
+//
+//        if (date1.compareTo(date2) > 0) {
+//            System.out.println("Date1 is after Date2");
+//        } else if (date1.compareTo(date2) < 0) {
+//            System.out.println("Date1 is before Date2");
+//        } else {
+//            System.out.println("Date1 is equal to Date2");
+//        }
 
-        if (date1.compareTo(date2) > 0) {
-            System.out.println("Date1 is after Date2");
-        } else if (date1.compareTo(date2) < 0) {
-            System.out.println("Date1 is before Date2");
-        } else {
-            System.out.println("Date1 is equal to Date2");
-        }
 
 
+        Date date3 = new Date(2000, 01, 03);
+        Date date4 = new Date(2000, 01, 04);
 
-        Collection<IRoom> res = RESERVATION_SERVICE.getAvailableRooms(date1, date2);
+        Collection<IRoom> res = RESERVATION_SERVICE.getAvailableRooms(date3, date4);
 
         System.out.println("Available rooms are: " + res);
 

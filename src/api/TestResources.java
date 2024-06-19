@@ -22,6 +22,8 @@ public class TestResources {
 
         ADMIN_RESOURCE.addRoom(room);
         ADMIN_RESOURCE.addRoom(room1);
+
+        System.out.println("All the rooms:");
         ADMIN_RESOURCE.getAllRooms();
         System.out.println();
 

@@ -98,12 +98,6 @@ public class ReservationService {
                 }
             }
 
-//            for(Reservation reservation : reservationMap.values()){
-//
-//                Customer c = reservation.getCustomer();
-//
-//                System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() + " Dates: " +reservation.getCheckInDate()+" - "+reservation.getCheckOutDate());
-//            }
         }
     };
 
@@ -136,9 +130,9 @@ public class ReservationService {
     public Collection<IRoom> getAvailableRooms(Date checkIn, Date checkOut){
 
         Collection<Reservation> reservations = getReservations();
-        Collection<IRoom> availableRooms = getAllNotReservedRoom();
+        Collection<IRoom> availableRooms = new LinkedList<>();
 
-        if(reservationMap.isEmpty()){
+        if(reservations.isEmpty()){
             availableRooms.addAll(roomsMap.values());
         }else{
             for(Reservation reservation: reservations){
@@ -146,9 +140,8 @@ public class ReservationService {
                     availableRooms.add(reservation.getRoom());
                 }
             }
+            availableRooms.addAll(getAllNotReservedRoom());
         }
-
-
 
         return availableRooms;
 }

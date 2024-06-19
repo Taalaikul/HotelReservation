@@ -2,6 +2,7 @@ import model.IRoom;
 import model.Room;
 import model.RoomType;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static api.AdminResource.ADMIN_RESOURCE;
@@ -23,63 +24,135 @@ public class AdminMenu {
                 "---------------------------------------"
         );
 
-        Scanner adminScanner = new Scanner(System.in);
-        int adminChoice = adminScanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
 
-        try {
-            if (adminChoice == 1) {
+        switch (input.charAt(0)) {
+            case '1':
                 ADMIN_RESOURCE.getAllCustomers();
-                AdminMenu.adminMenu();
-            } else if (adminChoice == 2) {
+                adminMenu();
+                break;
+            case '2':
                 ADMIN_RESOURCE.getAllRooms();
-                AdminMenu.adminMenu();
-            } else if (adminChoice == 3) {
-                System.out.println();
+                adminMenu();
+                break;
+            case '3':
                 ADMIN_RESOURCE.displayAllReservations();
-                System.out.println();
-                AdminMenu.adminMenu();
-            } else if (adminChoice == 4) {
+                adminMenu();
+                break;
+            case '4':
                 createRoom();
-                AdminMenu.adminMenu();
-            } else if (adminChoice == 5) {
+                adminMenu();
+                break;
+            case '5':
                 MainMenu.mainMenu();
-            } else {
-                System.out.println("Please select a number between 1 and 5!");
-                System.out.println();
-            }
-        }catch(Exception e) {
-            System.out.println("Invalid input! Please enter a number between 1 and 5");
+                break;
+            default:
+                System.out.println("Invalid input! Enter a number between 1 and 5!\n");
+                adminMenu();
+                break;
         }
 
     }
 
     public static void createRoom(){
-           Scanner sc = new Scanner(System.in);
-            System.out.println("Please enter a room number: ");
-            String roomNum = sc.nextLine();
+
+         String roomNum = getRoomNum();
+
+         String roomP = getRoomPrice();
+         Double roomPrice = Double.parseDouble(roomP);
+
+         RoomType roomType = getRoomType();
 
 
-            Scanner sc1 = new Scanner(System.in);
-            System.out.println("Please enter a room price: ");
-            Double roomPrice = sc1.nextDouble();
 
-            Scanner sc2 = new Scanner(System.in);
-            System.out.println("Please enter a number for Room Type: 1 for SINGLE, 2 for DOUBLE");
-            int roomT = sc2.nextInt();
-            RoomType roomType;
-
-            if(roomT == 1){
-                roomType = RoomType.SINGLE;
-            }else if(roomT == 2){
-                roomType = RoomType.DOUBLE;
-            }else{
-                System.out.println("Invalid Value! Returning to the beginning of creating a room");
-            }
-
-            roomType = RoomType.DOUBLE;
             IRoom room = new Room(roomNum, roomPrice, roomType);
 
-            ADMIN_RESOURCE.addRoom(room);
+            try {
+                ADMIN_RESOURCE.addRoom(room);
+            }catch(Exception e){
+                System.out.println("Please enter correct information!");
+                createRoom();
+            }
+
+        System.out.println("Would you like to add another room? Y (YES) , N (NO)");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String lowerCaseInput = input.toLowerCase();
+
+        if(lowerCaseInput.equals("y")){
+            createRoom();
+        }else{
+            adminMenu();
+        }
+
 
     }
+
+    public static String getRoomNum(){
+
+        String roomNum = "";
+
+        boolean isValid = false;
+        while (!isValid) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please enter a room number: ");
+            roomNum = sc.nextLine();
+
+            if (!roomNum.matches("-?\\d+")) {
+                System.out.println("You must supply a numerical value (no alpha characters allowed)!");
+                continue;
+            }
+            isValid = true;
+        }
+
+        return roomNum;
+
+    }
+
+    public static String getRoomPrice(){
+        String roomPrice= "";
+
+        boolean isValid = false;
+        while (!isValid) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please enter a room price: ");
+            roomPrice = sc.nextLine();
+
+            if (!roomPrice.matches("-?\\d+")) {
+                System.out.println("You must supply a numerical value (no alpha characters allowed)!");
+                continue;
+            }
+
+            isValid = true;
+        }
+
+        return roomPrice;
+    }
+
+    public static RoomType getRoomType(){
+
+        RoomType roomType = null;
+        String roomT ="";
+
+        boolean isValid = false;
+        while (!isValid) {
+            Scanner sc2 = new Scanner(System.in);
+            System.out.println("Please enter a number for Room Type: 1 for SINGLE, 2 for DOUBLE");
+            roomT = sc2.nextLine();
+
+            if(roomT.equals("1")){
+                roomType = RoomType.SINGLE;
+            }else if(roomT.equals("2")){
+                roomType = RoomType.DOUBLE;
+            }else{
+                continue;
+            }
+            isValid =true;
+        }
+
+
+
+        return roomType;
+        }
 }
