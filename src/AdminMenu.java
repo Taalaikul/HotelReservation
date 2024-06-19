@@ -75,12 +75,10 @@ public class AdminMenu {
                 createRoom();
             }
 
-        System.out.println("Would you like to add another room? Y (YES) , N (NO)");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        String lowerCaseInput = input.toLowerCase();
+        String s = "Would you like to add another room? Y (YES) , N (NO)";
+        String yesNo = MainMenu.inputYesNo(s);
 
-        if(lowerCaseInput.equals("y")){
+        if(yesNo.equals("y")){
             createRoom();
         }else{
             adminMenu();

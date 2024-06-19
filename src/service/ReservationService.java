@@ -2,6 +2,7 @@ package service;
 
 import model.*;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -89,13 +90,19 @@ public class ReservationService {
                 for(Reservation reservation: entry){
                     Customer c = reservation.getCustomer();
 
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String formattedCheckInDate = formatter.format(reservation.getCheckInDate());
+                    String formattedCheckOutDate = formatter.format(reservation.getCheckOutDate());
+
+
                     System.out.println("Name: " +c.getFirstName() + " " + c.getLastName() +"\n"+
-                                        "Room: " + reservation.getRoom().getRoomNumber() +"\n"+
-                                        "Price: " + reservation.getRoom().getRoomPrice() +"\n"+
-                                        "Dates: " +reservation.getCheckInDate()+" - "+reservation.getCheckOutDate());
-
-
+                                        "Room: " + reservation.getRoom().getRoomNumber() + " RoomType: " + reservation.getRoom().getRoomType() +"\n"+
+                                        "Price per night: " + reservation.getRoom().getRoomPrice() +"\n"+
+                                        "CheckIn Date: " + formattedCheckInDate +"\n"+
+                                        "CheckOut Date: " + formattedCheckOutDate);
+                                         System.out.println();
                 }
+
             }
 
         }
