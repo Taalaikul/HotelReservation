@@ -120,6 +120,21 @@ public class ReservationService {
         return reservations;
     }
 
+    public Collection<Reservation> getReservationsByRoomNumber (String roomNumber){
+
+        Collection<Reservation> reservationsByRoomNumber = new LinkedList<>();
+
+        Collection<Reservation> reservations = getReservations();
+
+        for(Collection<Reservation> reservation : reservationMap.values()){
+            for(Reservation reservation1: reservation){
+                if(reservation1.getRoom().getRoomNumber().equals(roomNumber))
+                reservationsByRoomNumber.add(reservation1);
+            }
+        }
+        return reservationsByRoomNumber;
+    }
+
     public Collection<IRoom> getAllNotReservedRoom(){
 
         Collection<IRoom> notReservedRooms = new ArrayList<>();

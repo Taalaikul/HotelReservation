@@ -96,11 +96,7 @@ public class MainMenu {
 
             IRoom room = getRoomInput(checkInDate, checkOutDate);
 
-            try {
-                HOTEL_RESOURCE.bookARoom(email, room, checkInDate, checkOutDate);
-            } catch (Exception e) {
-                System.out.println("We couldn't reserve you a room");
-            }
+           bookARoom(email, room, checkInDate, checkOutDate);
 
             System.out.println();
         }else{
@@ -113,7 +109,7 @@ public class MainMenu {
             }
             IRoom room = getRoomInput(checkInDate, checkOutDate);
 
-            reserveARoomForAlternateDates(checkInDate, checkOutDate, email, room);
+            reserveARoomForAlternateDates(email, room, checkInDate, checkOutDate);
         }
 
         System.out.println("Your reservation was successful!");
@@ -122,7 +118,43 @@ public class MainMenu {
 
     }
 
-    public static void reserveARoomForAlternateDates(Date checkIn, Date checkOut, String email, IRoom room){
+    public static boolean overlapDates(IRoom room, Date checkIn, Date checkOut){
+
+        String roomNumber = room.getRoomNumber();
+        boolean overlap =false;
+
+        Collection<Reservation> reservations = HOTEL_RESOURCE.getReservationsByRoomNumber(roomNumber);
+
+        for(Reservation reservation: reservations){
+            if(!reservation.getCheckInDate().before(checkOut) || !reservation.getCheckOutDate().after(checkIn)){
+                overlap =true;
+            }
+        }
+        return overlap;
+    }
+
+    public static void bookARoom(String email, IRoom room, Date checkIn, Date checkOut){
+//        String roomNumber = room.getRoomNumber();
+//
+//        Collection<Reservation> reservations = HOTEL_RESOURCE.getReservationsByRoomNumber(roomNumber);
+//
+//        for(Reservation reservation: reservations){
+//            if(reservation.getCheckInDate().before(checkOut) || reservation.getCheckOutDate().after(checkIn)){
+//                System.out.println("The room is booked for those dates. Try other dates");
+//                System.out.println();
+//                mainMenu();
+//            }
+//        }
+
+
+        try {
+            HOTEL_RESOURCE.bookARoom(email, room, checkIn, checkOut);
+        } catch (Exception e) {
+            System.out.println("We couldn't reserve you a room");
+        }
+    }
+
+    public static void reserveARoomForAlternateDates(String email, IRoom room, Date checkIn, Date checkOut){
 
         System.out.println("Enter CheckIn Date in the format mm/dd/yyyy");
         Date checkInDate = getInputDate();
@@ -130,13 +162,13 @@ public class MainMenu {
         System.out.println("Enter CheckOut Date in the format mm/dd/yyyy");
         Date checkOutDate = getInputDate();
 
-
-        try {
-            HOTEL_RESOURCE.bookARoom(email, room, checkInDate, checkOutDate);
-        }catch(Exception e){
-            System.out.println("We couldn't reserve you a room");
+        if(checkIn.after(checkOutDate) || checkOut.before(checkInDate)) {
+            bookARoom(email, room, checkInDate, checkOutDate);
+        }else{
+            System.out.println("The room is booked for those dates!");
+            System.out.println();
+            mainMenu();
         }
-
         System.out.println("Your reservation was successful!");
         System.out.println();
 
@@ -334,9 +366,9 @@ public class MainMenu {
         if(yesNo.equals("n")){
             email = createAnAccount();
         }else if(yesNo.equals("y")){
-
+            email = getEmail();
             try {
-                email = getEmail();
+                HOTEL_RESOURCE.getCustomer(email);
             }catch(Exception e){
                 System.out.println("Your account was not found: ");
                 haveAccount();

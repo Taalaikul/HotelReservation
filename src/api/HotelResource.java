@@ -19,6 +19,10 @@ public class HotelResource {
         CUSTOMER_SERVICE.getCustomer(email);
     };
 
+    public Collection<Reservation> getReservationsByRoomNumber(String roomNumber){
+        return RESERVATION_SERVICE.getReservationsByRoomNumber(roomNumber);
+    }
+
 
     public void createACustomer(String email, String firstName, String lastName){
         CUSTOMER_SERVICE.addCustomer(email, firstName, lastName);

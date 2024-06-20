@@ -43,8 +43,12 @@ public class TestServices {
         Date date1 = new Date(2000, 01, 01);
         Date date2 = new Date(2000, 01, 02);
 
+        Date date3 = new Date(2000, 01, 03);
+        Date date4 = new Date(2000, 01, 04);
+
 
         System.out.println( RESERVATION_SERVICE.reserveARoom(c, room, date1, date2));
+        System.out.println( RESERVATION_SERVICE.reserveARoom(c, room2, date3, date4));
 
 
         System.out.println("Reservation: " + RESERVATION_SERVICE.getCustomersReservation(c));
@@ -59,11 +63,14 @@ public class TestServices {
 
         System.out.println();
 
-        System.out.println("ALl reserved rooms: " + RESERVATION_SERVICE.getAllReservedRooms());
-        System.out.println();
+        System.out.println("Reservation by Room number");
+        System.out.println(RESERVATION_SERVICE.getReservationsByRoomNumber("100"));
 
-        System.out.println("All not reservedRooms: " + RESERVATION_SERVICE.getAllNotReservedRoom());
-        System.out.println();
+//        System.out.println("ALl reserved rooms: " + RESERVATION_SERVICE.getAllReservedRooms());
+//        System.out.println();
+//
+//        System.out.println("All not reservedRooms: " + RESERVATION_SERVICE.getAllNotReservedRoom());
+//        System.out.println();
 
 
 
@@ -82,13 +89,13 @@ public class TestServices {
 //        }
 
 
-
-        Date date3 = new Date(2000, 01, 03);
-        Date date4 = new Date(2000, 01, 04);
-
-        Collection<IRoom> res = RESERVATION_SERVICE.getAvailableRooms(date3, date4);
-
-        System.out.println("Available rooms are: " + res);
+//
+//        Date date3 = new Date(2000, 01, 03);
+//        Date date4 = new Date(2000, 01, 04);
+//
+//        Collection<IRoom> res = RESERVATION_SERVICE.getAvailableRooms(date3, date4);
+//
+//        System.out.println("Available rooms are: " + res);
 
 
     }
